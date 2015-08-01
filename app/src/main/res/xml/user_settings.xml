@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/ui_title" >
+        <ListPreference
+            android:key="preftempf"
+            android:title="@string/pref_tempf_name"
+            android:entries="@array/tempf_array"
+            android:entryValues="@array/tempf_arrayValues"
+            android:defaultValue="0"
+            />
+        <ListPreference
+            android:key="prefdistance"
+            android:title="@string/pref_distance_name"
+            android:entries="@array/distance_array"
+            android:entryValues="@array/distance_arrayValues"
+            android:defaultValue="0"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/advanced_settings_title" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefDataLogging"
+            android:summary="@string/pref_dataLogging_summary"
+            android:title="@string/pref_dataLogging_name" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+</PreferenceScreen>

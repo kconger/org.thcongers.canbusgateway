@@ -1,0 +1,5 @@
+/Users/keithconger/Projects/Android/AndroidstudioProjects/org.thecongers.canbusgateway/app/build/intermediates/classes/debug
+/Users/keithconger/Projects/Android/AndroidstudioProjects/org.thecongers.canbusgateway/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-092375a43c392f9c7c03f74987a53d12dc09e07e.jar
+/Users/keithconger/Projects/Android/AndroidstudioProjects/org.thecongers.canbusgateway/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-d5cf5dc1b0ed3f64e8ba521b4f06bb3ea181a77e.jar
+/Users/keithconger/Projects/Android/AndroidstudioProjects/org.thecongers.canbusgateway/app/build/intermediates/pre-dexed/debug/classes-bb5a2a7c432b9e856eeaab7de825db95a473be6d.jar
+/Users/keithconger/Projects/Android/AndroidstudioProjects/org.thecongers.canbusgateway/app/build/intermediates/pre-dexed/debug/classes-25fae232b9b8c038246e064b46f3429bf22b355a.jar
