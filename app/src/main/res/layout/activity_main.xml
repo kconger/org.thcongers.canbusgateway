@@ -166,14 +166,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="WIP:"
+                android:text="Ambient Light:"
                 android:id="@+id/textView41" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="RAW Message:"
+                android:text="WIP:"
                 android:id="@+id/textView43" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="RAW Message:"
+                android:id="@+id/textView45" />
 
         </LinearLayout>
 
@@ -328,6 +334,12 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text=""
                 android:id="@+id/textViewAirTemp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text=""
+                android:id="@+id/textViewAmbientLight" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

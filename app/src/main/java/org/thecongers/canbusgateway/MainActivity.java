@@ -74,6 +74,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView txtESA;
     private TextView txtFuelLevel;
     private TextView txtAirTemp;
+    private TextView txtAmbientLight;
     private TextView txtWIP;
     private TextView txtRAWMessage;
 
@@ -117,6 +118,7 @@ public class MainActivity extends ActionBarActivity {
         txtESA = (TextView) findViewById(R.id.textViewESA);
         txtFuelLevel = (TextView) findViewById(R.id.textViewFuelLevel);
         txtAirTemp = (TextView) findViewById(R.id.textViewAirTemp);
+        txtAmbientLight = (TextView) findViewById(R.id.textViewAmbientLight);
         txtWIP = (TextView) findViewById(R.id.textViewWIP);
         txtRAWMessage = (TextView) findViewById(R.id.textViewRawMsg);
 
@@ -394,7 +396,13 @@ public class MainActivity extends ActionBarActivity {
                                 }
                                 txtOdometers.setText(String.valueOf((int) Math.round(odometer)) + " " + odometerUnit);
                             }else if (splitMessage[0].contains("3FF")){
-                                txtWIP.setText(splitMessage[2]);
+                                String ambientLightValue = splitMessage[2].substring(0, 1);
+                                if (ambientLightValue.contains("B")){
+                                    txtAmbientLight.setText("Dark");
+                                } else if (ambientLightValue.contains("7")){
+                                    txtAmbientLight.setText("Light");
+                                }
+                                txtWIP.setText(message);
                             }else if (splitMessage[0].contains("7BE")){
 
                             } else {
