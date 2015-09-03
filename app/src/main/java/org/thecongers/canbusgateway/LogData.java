@@ -39,13 +39,12 @@ class LogData {
     {
         try {
             File root = new File(Environment.getExternalStorageDirectory() + "/canbusgateway/");
-            if(!root.exists()) {
+            if(!root.exists()){
                 if(!root.mkdirs()){
                     Log.d(TAG,"Unable to create directory: " + root);
                 }
             }
-            if(root.canWrite())
-            {
+            if(root.canWrite()){
                 Log.d(TAG,"Initialize Logging");
                 // Get current time in UTC
                 Calendar cal = Calendar.getInstance();
@@ -57,7 +56,7 @@ class LogData {
                 File logFile = new File( root, "canbusgateway-" + curdatetime + ".csv" );
                 FileWriter logWriter = new FileWriter( logFile );
                 outFile = new PrintWriter( logWriter );
-                outFile.write( "Header\n" );
+                outFile.write( "Time(UTC),Message ID,Byte1,Byte2,Byte3,Byte4,Byte5,Byte6,Byte7,Byte8\n" );
             }
         } catch (IOException e) {
             Log.d(TAG, "Could not write to file: " + e.getMessage());
@@ -76,6 +75,7 @@ class LogData {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         String curdatetime = formatter.format(date);
 
+        // Write message
         outFile.write( curdatetime + "," + message + "\n" );
         outFile.flush();
     }

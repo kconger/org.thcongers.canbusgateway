@@ -263,7 +263,7 @@ public class MainActivity extends ActionBarActivity {
                             }else if (splitMessage[0].contains("2BC")){
                                 // Oil Temperature
                                 // TODO:WIP
-                                double oilTemp = Integer.parseInt(splitMessage[3], 16 ) - 48.0;
+                                double oilTemp = Integer.parseInt(splitMessage[3], 16 ) - 40.0;
                                 if (sharedPrefs.getString("preftempf", "0").contains("0")) {
                                     // F
                                     oilTemp = (9.0 / 5.0) * oilTemp + 32.0;
@@ -402,7 +402,6 @@ public class MainActivity extends ActionBarActivity {
                                 } else if (ambientLightValue.contains("7")){
                                     txtAmbientLight.setText("Light");
                                 }
-                                txtWIP.setText(message);
                             }else if (splitMessage[0].contains("7BE")){
 
                             } else {
@@ -450,6 +449,10 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId()) {
+            case R.id.action_btconnect:
+                // Connect Menu was selected
+                btConnect();
+                return true;
             case R.id.action_settings:
                 // Settings Menu was selected
                 Intent i = new Intent(getApplicationContext(), org.thecongers.canbusgateway.UserSettingActivity.class);
