@@ -172,14 +172,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="WIP:"
+                android:text="Lamp Fault:"
                 android:id="@+id/textView43" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="RAW Message:"
+                android:text="Side Stand:"
                 android:id="@+id/textView45" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WIP:"
+                android:id="@+id/textView47" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="RAW Message:"
+                android:id="@+id/textView49" />
 
         </LinearLayout>
 
@@ -340,6 +352,18 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text=""
                 android:id="@+id/textViewAmbientLight" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text=""
+                android:id="@+id/textViewLampFault" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text=""
+                android:id="@+id/textViewSideStand" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

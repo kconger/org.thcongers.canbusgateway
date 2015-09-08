@@ -75,6 +75,8 @@ public class MainActivity extends ActionBarActivity {
     private TextView txtFuelLevel;
     private TextView txtAirTemp;
     private TextView txtAmbientLight;
+    private TextView txtLampFault;
+    private TextView txtSideStand;
     private TextView txtWIP;
     private TextView txtRAWMessage;
 
@@ -119,6 +121,8 @@ public class MainActivity extends ActionBarActivity {
         txtFuelLevel = (TextView) findViewById(R.id.textViewFuelLevel);
         txtAirTemp = (TextView) findViewById(R.id.textViewAirTemp);
         txtAmbientLight = (TextView) findViewById(R.id.textViewAmbientLight);
+        txtLampFault = (TextView) findViewById(R.id.textViewLampFault);
+        txtSideStand = (TextView) findViewById(R.id.textViewSideStand);
         txtWIP = (TextView) findViewById(R.id.textViewWIP);
         txtRAWMessage = (TextView) findViewById(R.id.textViewRawMsg);
 
@@ -185,6 +189,18 @@ public class MainActivity extends ActionBarActivity {
                                     killSwitch = "Off";
                                 }
                                 txtKillSwitch.setText(killSwitch);
+
+                                //Side Stand
+                                String sideStandValue = splitMessage[6].substring(1);
+                                String sideStandEngaged = null;
+                                if (sideStandValue.contains("5")){
+                                    sideStandEngaged = "Up";
+                                }else if (sideStandValue.contains("9")){
+                                    sideStandEngaged = "Down";
+                                }else {
+                                    sideStandEngaged = "Other Value: " + sideStandValue;
+                                }
+                                txtSideStand.setText(sideStandEngaged);
 
                             }else if (splitMessage[0].contains("130")){
                                 //Turn indicators
@@ -261,7 +277,7 @@ public class MainActivity extends ActionBarActivity {
                                 txtRearDistance.setText(String.valueOf((int) Math.round(rearDistance)) + " " + distanceUnit);
 
                             }else if (splitMessage[0].contains("2BC")){
-                                // Oil Temperature
+                                // Oil Temperature?
                                 // TODO:WIP
                                 double oilTemp = Integer.parseInt(splitMessage[3], 16 ) - 40.0;
                                 if (sharedPrefs.getString("preftempf", "0").contains("0")) {
@@ -293,9 +309,9 @@ public class MainActivity extends ActionBarActivity {
                                 }
                                 txtGear.setText(gear);
 
-                                // Air Intake Temperature
+                                // Air Intake Temperature?
                                 // TODO:WIP
-                                double airTemp = (Integer.parseInt(splitMessage[8], 16 ) - 80.0);
+                                double airTemp = (Integer.parseInt(splitMessage[8], 16 ) - 40.0);
                                 if (sharedPrefs.getString("preftempf", "0").contains("0")) {
                                     // F
                                     airTemp = (9.0 / 5.0) * airTemp + 32.0;
@@ -303,29 +319,31 @@ public class MainActivity extends ActionBarActivity {
                                 }
                                 txtAirTemp.setText(String.valueOf(airTemp) + temperatureUnit);
 
-                            }else if (splitMessage[0].contains("2D0")){
+                                // WIP
+                                txtWIP.setText(message);
+                            }else if (splitMessage[0].contains("2D0")) {
                                 //Info Button
                                 String infoButtonValue = splitMessage[6].substring(1);
                                 String infoButton = "";
-                                if (infoButtonValue.contains("5")){
+                                if (infoButtonValue.contains("5")) {
                                     infoButton = "Short Press";
-                                }else if (infoButtonValue.contains("6")){
+                                } else if (infoButtonValue.contains("6")) {
                                     infoButton = "Long Press";
-                                }else{
+                                } else {
                                     infoButton = "Inactive";
                                 }
                                 txtInfoButton.setText(infoButton);
 
                                 //Heated Grips
-                                String heatedGripSwitchValue = splitMessage[8].substring(0,1);
+                                String heatedGripSwitchValue = splitMessage[8].substring(0, 1);
                                 String heatedGripSwitch = null;
-                                if (heatedGripSwitchValue.contains("C")){
+                                if (heatedGripSwitchValue.contains("C")) {
                                     heatedGripSwitch = "Off";
-                                }else if (heatedGripSwitchValue.contains("D")){
+                                } else if (heatedGripSwitchValue.contains("D")) {
                                     heatedGripSwitch = "Low";
-                                }else if (heatedGripSwitchValue.contains("E")){
+                                } else if (heatedGripSwitchValue.contains("E")) {
                                     heatedGripSwitch = "High";
-                                }else{
+                                } else {
                                     heatedGripSwitch = "Other: " + heatedGripSwitchValue;
                                 }
                                 txtHeatedGrips.setText(heatedGripSwitch);
@@ -333,48 +351,48 @@ public class MainActivity extends ActionBarActivity {
                                 //ESA Damping and Preload
                                 String esaDampingValue1 = splitMessage[5].substring(1);
                                 String esaDampingValue2 = splitMessage[8].substring(1);
-                                String esaPreLoadValue = splitMessage[5].substring(0,1);
-                                if (esaDampingValue1.contains("B") && esaDampingValue2.contains("1")){
+                                String esaPreLoadValue = splitMessage[5].substring(0, 1);
+                                if (esaDampingValue1.contains("B") && esaDampingValue2.contains("1")) {
                                     txtESA.setText("SOFT: Smooth");
-                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("2")){
+                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("2")) {
                                     txtESA.setText("NORM: Smooth");
-                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("3")){
+                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("3")) {
                                     txtESA.setText("HARD: Smooth");
-                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("4")){
+                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("4")) {
                                     txtESA.setText("SOFT: Uneven");
-                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("5")){
+                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("5")) {
                                     txtESA.setText("NORM: Uneven");
-                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("6")){
+                                } else if (esaDampingValue1.contains("B") && esaDampingValue2.contains("6")) {
                                     txtESA.setText("HARD: Uneven");
-                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("1")){
+                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("1")) {
                                     txtESA.setText("SOFT: Smooth");
-                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("2")){
+                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("2")) {
                                     txtESA.setText("NORM: Smooth");
-                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("3")){
+                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("3")) {
                                     txtESA.setText("HARD: Smooth");
-                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("4")){
+                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("4")) {
                                     txtESA.setText("SOFT: Uneven");
-                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("5")){
+                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("5")) {
                                     txtESA.setText("NORM: Uneven");
-                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("6")){
+                                } else if (esaDampingValue1.contains("7") && esaDampingValue2.contains("6")) {
                                     txtESA.setText("HARD: Uneven");
-                                } else if (esaPreLoadValue.contains("1")){
+                                } else if (esaPreLoadValue.contains("1")) {
                                     txtESA.setText("COMF: Solo");
-                                } else if (esaPreLoadValue.contains("2")){
+                                } else if (esaPreLoadValue.contains("2")) {
                                     txtESA.setText("NORM: Solo");
-                                } else if (esaPreLoadValue.contains("3")){
+                                } else if (esaPreLoadValue.contains("3")) {
                                     txtESA.setText("SPORT: Solo");
-                                } else if (esaPreLoadValue.contains("4")){
+                                } else if (esaPreLoadValue.contains("4")) {
                                     txtESA.setText("COMF: Luggage");
-                                } else if (esaPreLoadValue.contains("5")){
+                                } else if (esaPreLoadValue.contains("5")) {
                                     txtESA.setText("NORM: Luggage");
-                                } else if (esaPreLoadValue.contains("6")){
+                                } else if (esaPreLoadValue.contains("6")) {
                                     txtESA.setText("SPORT: Luggage");
-                                } else if (esaPreLoadValue.contains("7")){
+                                } else if (esaPreLoadValue.contains("7")) {
                                     txtESA.setText("COMF: Passenger");
-                                } else if (esaPreLoadValue.contains("8")){
+                                } else if (esaPreLoadValue.contains("8")) {
                                     txtESA.setText("NORM: Passenger");
-                                } else if (esaPreLoadValue.contains("9")){
+                                } else if (esaPreLoadValue.contains("9")) {
                                     txtESA.setText("SPORT: Passenger");
                                 } else {
                                     txtESA.setText("");
@@ -384,6 +402,20 @@ public class MainActivity extends ActionBarActivity {
                                 //Fuel Level
                                 double fuelLevelPercent = (Integer.parseInt(splitMessage[4], 16) / 255.0) * 100.0;
                                 txtFuelLevel.setText(String.valueOf((int) Math.round(fuelLevelPercent)));
+
+                                //Lamp Fault
+                                String lampFaultValue = splitMessage[3].substring(0, 1);
+                                if (lampFaultValue.contains("0")) {
+                                    txtLampFault.setText("None");
+                                }else if (lampFaultValue.contains("1")) {
+                                    txtLampFault.setText("Low Beam");
+                                }else if (lampFaultValue.contains("4")){
+                                    txtLampFault.setText("High Beam");
+                                }else if (lampFaultValue.contains("8")){
+                                    txtLampFault.setText("Signal Bulb");
+                                }else{
+                                    txtLampFault.setText("Unknown");
+                                }
                             }else if (splitMessage[0].contains("3F8")){
                                 String odometerValue = "";
                                 for(int i=4;i>1;i--){
@@ -408,10 +440,15 @@ public class MainActivity extends ActionBarActivity {
                                 Log.d(TAG, "Unknown CANBus Message");
                             }
                             txtRAWMessage.setText(message);
-                            if (!sharedPrefs.getBoolean("prefDataLogging", false) && (logger != null)) {
-                                logger.write(message);
+                            if (sharedPrefs.getBoolean("prefDataLogging", false)) {
+                                // Log data
+                                if (logger == null) {
+                                    logger = new LogData();
+                                }
+                                if (logger != null) {
+                                    logger.write(message);
+                                }
                             }
-
                         } else {
                             Log.d(TAG, "Malformed message, message length: " + msg.arg1);
                         }
