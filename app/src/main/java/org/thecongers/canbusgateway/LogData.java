@@ -28,7 +28,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 
 class LogData {
@@ -50,7 +49,6 @@ class LogData {
                 Calendar cal = Calendar.getInstance();
                 Date date = cal.getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
-                formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
                 String curdatetime = formatter.format(date);
 
                 File logFile = new File( root, "canbusgateway-" + curdatetime + ".csv" );
@@ -71,8 +69,7 @@ class LogData {
         // Get current time in UTC
         Calendar cal = Calendar.getInstance();
         Date date = cal.getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ");
         String curdatetime = formatter.format(date);
 
         // Write message

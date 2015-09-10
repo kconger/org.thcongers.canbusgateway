@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView txtInfoButton;
     private TextView txtHeatedGrips;
     private TextView txtOdometers;
-    private TextView txtOilTemperature;
+    private TextView txtEngineTemp;
     private TextView txtABS;
     private TextView txtESA;
     private TextView txtFuelLevel;
@@ -115,7 +115,7 @@ public class MainActivity extends ActionBarActivity {
         txtInfoButton = (TextView) findViewById(R.id.textViewInfoButton);
         txtHeatedGrips = (TextView) findViewById(R.id.textViewHeatedGrips);
         txtOdometers = (TextView) findViewById(R.id.textViewOdometer);
-        txtOilTemperature = (TextView) findViewById(R.id.textViewOilTemp);
+        txtEngineTemp = (TextView) findViewById(R.id.textViewEngineTemp);
         txtABS = (TextView) findViewById(R.id.textViewABS);
         txtESA = (TextView) findViewById(R.id.textViewESA);
         txtFuelLevel = (TextView) findViewById(R.id.textViewFuelLevel);
@@ -277,17 +277,16 @@ public class MainActivity extends ActionBarActivity {
                                 txtRearDistance.setText(String.valueOf((int) Math.round(rearDistance)) + " " + distanceUnit);
 
                             }else if (splitMessage[0].contains("2BC")){
-                                // Oil Temperature?
-                                // TODO:WIP
-                                double oilTemp = Integer.parseInt(splitMessage[3], 16 ) - 40.0;
+                                //Engine Temperature
+                                double engineTemp = (Integer.parseInt(splitMessage[3], 16 ) * 0.75) - 24.0;
                                 if (sharedPrefs.getString("preftempf", "0").contains("0")) {
                                     // F
-                                    oilTemp = (9.0 / 5.0) * oilTemp + 32.0;
+                                    engineTemp = (int) Math.round((9.0 / 5.0) * engineTemp + 32.0);
                                     temperatureUnit = "F";
                                 }
-                                txtOilTemperature.setText(String.valueOf((int) Math.round(oilTemp)) + temperatureUnit);
+                                txtEngineTemp.setText(String.valueOf(engineTemp) + temperatureUnit);
 
-                                // Gear
+                                //Gear
                                 String gearValue = splitMessage[6].substring(0,1);
                                 String gear;
                                 if (gearValue.contains("1")){
@@ -309,18 +308,15 @@ public class MainActivity extends ActionBarActivity {
                                 }
                                 txtGear.setText(gear);
 
-                                // Air Intake Temperature?
-                                // TODO:WIP
-                                double airTemp = (Integer.parseInt(splitMessage[8], 16 ) - 40.0);
+                                //Air Temperature
+                                double airTemp = (Integer.parseInt(splitMessage[8], 16 ) * 0.75) - 48.0;
                                 if (sharedPrefs.getString("preftempf", "0").contains("0")) {
                                     // F
-                                    airTemp = (9.0 / 5.0) * airTemp + 32.0;
+                                    airTemp = (int) Math.round((9.0 / 5.0) * airTemp + 32.0);
                                     temperatureUnit = "F";
                                 }
                                 txtAirTemp.setText(String.valueOf(airTemp) + temperatureUnit);
-
-                                // WIP
-                                txtWIP.setText(message);
+                                
                             }else if (splitMessage[0].contains("2D0")) {
                                 //Info Button
                                 String infoButtonValue = splitMessage[6].substring(1);
