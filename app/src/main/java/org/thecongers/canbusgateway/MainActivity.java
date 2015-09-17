@@ -432,8 +432,6 @@ public class MainActivity extends ActionBarActivity {
                                 }
                             }else if (splitMessage[0].contains("7BE")){
 
-                            } else {
-                                Log.d(TAG, "Unknown CANBus Message");
                             }
                             txtRAWMessage.setText(message);
                             if (sharedPrefs.getBoolean("prefDataLogging", false)) {
